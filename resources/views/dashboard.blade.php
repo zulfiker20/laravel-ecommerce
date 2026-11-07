@@ -405,31 +405,64 @@
                                             </div>
 
                                             <div class="card-body">
-                                                <form method="POST" action="{{ route('password.update') }}">
+                                                <form method="post" action="{{ route('user.update.password') }}">
                                                     @csrf
-                                                    @method('PUT')
 
-                                                    <div class="form-group mb-3">
-                                                        <label>Current Password</label>
-                                                        <input type="password" name="current_password"
-                                                            class="form-control" placeholder="Current Password">
+                                                    <div class="row mb-3">
+                                                        <div class="col-sm-3">
+                                                            <h6 class="mb-0">Old Password</h6>
+                                                        </div>
+                                                        <div class="col-sm-9 text-secondary">
+                                                            <input type="password" name="old_password"
+                                                                class="form-control" id="current_password"
+                                                                placeholder="Old Password" />
+
+                                                            @error('old_password')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
                                                     </div>
 
-                                                    <div class="form-group mb-3">
-                                                        <label>New Password</label>
-                                                        <input type="password" name="password" class="form-control"
-                                                            placeholder="New Password">
+
+                                                    <div class="row mb-3">
+                                                        <div class="col-sm-3">
+                                                            <h6 class="mb-0">New Password</h6>
+                                                        </div>
+                                                        <div class="col-sm-9 text-secondary">
+                                                            <input type="password" name="new_password"
+                                                                class="form-control @error('new_password') is-invalid @enderror"
+                                                                id="new_password" placeholder="New Password" />
+
+                                                            @error('new_password')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
                                                     </div>
 
-                                                    <div class="form-group mb-3">
-                                                        <label>Confirm Password</label>
-                                                        <input type="password" name="password_confirmation"
-                                                            class="form-control" placeholder="Confirm Password">
+
+                                                    <div class="row mb-3">
+                                                        <div class="col-sm-3">
+                                                            <h6 class="mb-0">Confirm New Password</h6>
+                                                        </div>
+                                                        <div class="col-sm-9 text-secondary">
+                                                            <input type="password" name="new_password_confirmation"
+                                                                class="form-control" id="new_password_confirmation"
+                                                                placeholder="Confirm New Password" />
+                                                        </div>
                                                     </div>
 
-                                                    <button type="submit" class="btn btn-fill-out">
-                                                        Update Password
-                                                    </button>
+
+
+
+                                                    <div class="row">
+                                                        <div class="col-sm-3"></div>
+                                                        <div class="col-sm-9 text-secondary">
+                                                            <input type="submit" class="btn btn-primary px-4"
+                                                                value="Save Changes" />
+                                                        </div>
+                                                    </div>
+
+
                                                 </form>
                                             </div>
                                         </div>
@@ -443,40 +476,27 @@
                                             <div class="card-body">
                                                 <p>Already have an account? <a href="page-login.html">Log in
                                                         instead!</a></p>
-                                                <form method="post" name="enq">
+                                                <form method="post" action="{{ route('user.profile.update') }}">
+                                                    @csrf
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
-                                                            <label>User Name <span class="required">*</span></label>
+                                                            <label>User Name<span class="required">*</span></label>
                                                             <input required="" value="{{ $userdata->username }}"
                                                                 class="form-control" name="name" type="text" />
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                            <label>User Name <span class="required">*</span></label>
+                                                            <label>Name <span class="required">*</span></label>
                                                             <input required="" value="{{ $userdata->name }}"
-                                                                class="form-control" name="name" type="text" />
+                                                                class="form-control" name="username"
+                                                                type="text" />
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                            <label>User Name <span class="required">*</span></label>
+                                                            <label>Email <span class="required">*</span></label>
                                                             <input required="" value="{{ $userdata->email }}"
                                                                 class="form-control" name="email" type="email" />
                                                         </div>
-                                                        <div class="form-group col-md-12">
-                                                            <label>Current Password <span
-                                                                    class="required">*</span></label>
-                                                            <input required="" class="form-control"
-                                                                name="password" type="password" />
-                                                        </div>
-                                                        <div class="form-group col-md-12">
-                                                            <label>New Password <span class="required">*</span></label>
-                                                            <input required="" class="form-control"
-                                                                name="npassword" type="password" />
-                                                        </div>
-                                                        <div class="form-group col-md-12">
-                                                            <label>Confirm Password <span
-                                                                    class="required">*</span></label>
-                                                            <input required="" class="form-control"
-                                                                name="cpassword" type="password" />
-                                                        </div>
+
+
                                                         <div class="col-md-12">
                                                             <button type="submit"
                                                                 class="btn btn-fill-out submit font-weight-bold"

@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="col-lg-8">
-                        <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('vendor.profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="card">

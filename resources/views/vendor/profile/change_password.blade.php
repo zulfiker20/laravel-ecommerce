@@ -20,7 +20,7 @@
                 <div class="row">
 
                     <div class="col-lg-8">
-                        <form method="post" action="{{ route('admin.update.password') }}">
+                        <form method="post" action="{{ route('vendor.update.password') }}">
                             @csrf
 
                             <div class="row mb-3">

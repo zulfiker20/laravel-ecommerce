@@ -27,7 +27,7 @@ class VendorController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/vendor/login');
+        return redirect()->route('vendor.login');
     }
      public function profile()
     {
@@ -84,7 +84,7 @@ class VendorController extends Controller
             'alert-type' => 'success'
         ];
 
-        return redirect()->back()->with($notification);
+        return redirect()->route('vendor.profile');
     }
       public function ChangePassword()
     {

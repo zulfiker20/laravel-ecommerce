@@ -26,7 +26,7 @@ Route::get('/', [HomeController::class, 'index'])->name('front.home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'role:user'])->name('dashboard');
 
 // Admin Group Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -46,6 +46,10 @@ Route::middleware(['auth'])->group(function () {
     // user logout  
     Route::get('/user/logout', [UserDashboardController::class, 'userlogout'])->name('user.logout');
     Route::get('/user/profile', [UserDashboardController::class, 'userprofile'])->name('user.profile');
+      Route::post('/user/profile/update', [UserDashboardController::class, 'UserProfileUpdate'])->name('user.profile.update');
+    //   change password
+
+    Route::post('/user/update/password', [UserDashboardController::class, 'userUpdatePassword'])->name('user.update.password');
 });
 
 
