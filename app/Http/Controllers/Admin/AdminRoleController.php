@@ -32,7 +32,7 @@ class AdminRoleController extends Controller
 
         Permission::create([
             'name' => $request->name,
-            'guard_name' => 'web',
+            'group_name' => $request->group_name,
         ]);
 
         return redirect()
@@ -59,6 +59,7 @@ class AdminRoleController extends Controller
 
         $permission->update([
             'name' => $request->name,
+            'group_name' => $request->group_name,
         ]);
 
         return redirect()

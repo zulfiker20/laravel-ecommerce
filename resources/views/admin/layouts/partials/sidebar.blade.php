@@ -58,6 +58,8 @@
 						</li>
 						<li> <a href="{{ route('admin.role.index') }}"><i class="bx bx-right-arrow-alt"></i>Roles</a>
 						</li>
+						<li> <a href=""><i class="bx bx-right-arrow-alt"></i>Roles and Permissions</a>
+						</li>
 					</ul>
 				</li>
 			</ul>

@@ -4,29 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Vendor\VendorController;
+use App\Http\Controllers\UserDashboardController;
 
-
-
-Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
-// Vendor Group Routes
-Route::middleware(['auth', 'role:vendor'])->group(function () {
-    Route::get('/vendor/dashboard', [VendorController::class, 'index'])->name('vendor.dashboard');
-    Route::get('/vendor/logout', [VendorController::class, 'logout'])->name('vendor.logout');
-    Route::get('/vendor/profile', [VendorController::class, 'profile'])->name('vendor.profile');
-    Route::post('/vendor/profile/update', [VendorController::class, 'ProfileUpdate'])->name('vendor.profile.update');
-    Route::get('/vendor/change/password', [VendorController::class, 'ChangePassword'])->name('vendor.change.password');
-    Route::post('/vendor/update/password', [VendorController::class, 'UpdatePassword'])->name('vendor.update.password');
-});
-
-Route::get('/vendor/login', [VendorController::class, 'login'])->name('vendor.login');
-
-use App\Http\Controllers\Front\HomeController;
-
-Route::get('/', [HomeController::class, 'index'])->name('front.home');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'role:user'])->name('dashboard');
 
 // Admin Group Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -38,19 +17,34 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/change/password', [AdminController::class, 'ChangePassword'])->name('admin.change.password');
     Route::post('/admin/update/password', [AdminController::class, 'UpdatePassword'])->name('admin.update.password');
 });
+Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
+// Vendor Group Routes
+Route::middleware(['auth', 'role:vendor'])->group(function () {
+    Route::get('/vendor/dashboard', [VendorController::class, 'index'])->name('vendor.dashboard');
+    Route::get('/vendor/logout', [VendorController::class, 'logout'])->name('vendor.logout');
+    Route::get('/vendor/profile', [VendorController::class, 'profile'])->name('vendor.profile');
+    Route::post('/vendor/profile/update', [VendorController::class, 'ProfileUpdate'])->name('vendor.profile.update');
+    Route::get('/vendor/change/password', [VendorController::class, 'ChangePassword'])->name('vendor.change.password');
+    Route::post('/vendor/update/password', [VendorController::class, 'UpdatePassword'])->name('vendor.update.password');
+});
+Route::get('/vendor/login', [VendorController::class, 'login'])->name('vendor.login');
 
-use App\Http\Controllers\UserDashboardController;
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
-    // user logout  
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('user/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::get('/user/logout', [UserDashboardController::class, 'userlogout'])->name('user.logout');
     Route::get('/user/profile', [UserDashboardController::class, 'userprofile'])->name('user.profile');
-      Route::post('/user/profile/update', [UserDashboardController::class, 'UserProfileUpdate'])->name('user.profile.update');
+    Route::post('/user/profile/update', [UserDashboardController::class, 'UserProfileUpdate'])->name('user.profile.update');
     //   change password
 
     Route::post('/user/update/password', [UserDashboardController::class, 'userUpdatePassword'])->name('user.update.password');
 });
+
+use App\Http\Controllers\Front\HomeController;
+
+Route::get('/', [HomeController::class, 'index'])->name('front.home');
+
+
 
 
 
