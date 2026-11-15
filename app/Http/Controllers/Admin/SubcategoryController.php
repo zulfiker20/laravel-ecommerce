@@ -38,10 +38,10 @@ class SubCategoryController extends Controller
             'slug' => 'nullable|string|max:255',
         ]);
 
-         $slug = Str::slug($request->name);
+        $slug = Str::slug($request->name);
         $validated['slug'] = $slug;
 
-       
+
 
         $subcategory = new SubCategory();
         $subcategory->fill($validated);
@@ -74,13 +74,13 @@ class SubCategoryController extends Controller
             'category_id' => 'required',
             'name' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255',
-           
+
         ]);
 
         $slug = Str::slug($request->name);
         $validated['slug'] = $slug;
 
-       
+
 
         $subcategory->fill($validated);
         $subcategory->save();
@@ -95,12 +95,20 @@ class SubCategoryController extends Controller
     {
         $subcategory = SubCategory::findOrFail($id);
 
-      
+
 
         $subcategory->delete();
 
         return redirect()
             ->route('admin.subcategory.index')
             ->with('success', 'Subcategory deleted successfully.');
+    }
+    public function GetSubCategory($category_id)
+    {
+        $subcategories = SubCategory::where('category_id', $category_id)
+            ->orderBy('name', 'ASC')
+            ->get();
+
+        return response()->json($subcategories);
     }
 }

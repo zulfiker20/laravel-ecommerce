@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\Admin\AdminSetupController;
+
 
 
 // Admin Group Routes
@@ -13,11 +15,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
     Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::post('/admin/profile/update', [AdminController::class, 'ProfileUpdate'])->name('admin.profile.update');
-    // password change
     Route::get('/admin/change/password', [AdminController::class, 'ChangePassword'])->name('admin.change.password');
     Route::post('/admin/update/password', [AdminController::class, 'UpdatePassword'])->name('admin.update.password');
 });
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
+
 // Vendor Group Routes
 Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::get('/vendor/dashboard', [VendorController::class, 'index'])->name('vendor.dashboard');
@@ -105,6 +107,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::delete('subcategory/delete/{id}', [AdminSubcategory::class, 'destroy'])
         ->name('subcategory.delete');
+
+           Route::get('/subcategory/ajax/{category_id}', [AdminSubcategory::class, 'GetSubCategory']);
+
+       
+
 });
 
 
@@ -198,40 +205,64 @@ use App\Http\Controllers\Admin\AdminRoleController;
 Route::prefix('admin')->name('admin.')->group(function () {
 
     // Permission CRUD
-    Route::get('/permission', [AdminRoleController::class, 'index'])
-        ->name('permission.index');
+    Route::get('/permission', [AdminRoleController::class, 'index'])->name('permission.index');
+    Route::get('/permission/create', [AdminRoleController::class, 'create'])->name('permission.create');
+    Route::post('/permission/store', [AdminRoleController::class, 'store'])->name('permission.store');
+    Route::get('/permission/edit/{id}', [AdminRoleController::class, 'edit'])->name('permission.edit');
+    Route::post('/permission/update/{id}', [AdminRoleController::class, 'update'])->name('permission.update');
+    Route::delete('/permission/delete/{id}', [AdminRoleController::class, 'destroy'])->name('permission.delete');
 
-    Route::get('/permission/create', [AdminRoleController::class, 'create'])
-        ->name('permission.create');
+    // Role CRUD
+    Route::get('/role', [AdminRoleController::class, 'roleIndex'])->name('role.index');
+    Route::get('/role/create', [AdminRoleController::class, 'roleCreate'])->name('role.create');
+    Route::post('/role/store', [AdminRoleController::class, 'roleStore'])->name('role.store');
+    Route::get('/role/edit/{id}', [AdminRoleController::class, 'roleEdit'])->name('role.edit');
+    Route::post('/role/update/{id}', [AdminRoleController::class, 'roleUpdate'])->name('role.update');
+    Route::delete('/role/delete/{id}', [AdminRoleController::class, 'roleDestroy'])->name('role.delete');
 
-    Route::post('/permission/store', [AdminRoleController::class, 'store'])
-        ->name('permission.store');
-
-    Route::get('/permission/edit/{id}', [AdminRoleController::class, 'edit'])
-        ->name('permission.edit');
-
-    Route::post('/permission/update/{id}', [AdminRoleController::class, 'update'])
-        ->name('permission.update');
-
-    Route::delete('/permission/delete/{id}', [AdminRoleController::class, 'destroy'])
-        ->name('permission.delete');
+    // roles permissions 
+    Route::get('all/role', [AdminRoleController::class, 'AllRoleIndex'])->name('all.role.index');
+    Route::get('all/role/create', [AdminRoleController::class, 'AllRoleCreate'])->name('all.role.create');
+    Route::post('all/role/store', [AdminRoleController::class, 'AllRoleStore'])->name('all.role.store');
+    Route::get('all/role/edit/{id}', [AdminRoleController::class, 'AllRoleEdit'])->name('all.role.edit');
+    Route::post('all/role/update/{id}', [AdminRoleController::class, 'AllRoleUpdate'])->name('all.role.update');
+    Route::delete('all/role/delete/{id}', [AdminRoleController::class, 'AllRoleDestroy'])->name('all.role.delete');
 
 
-    Route::get('/role', [AdminRoleController::class, 'roleIndex'])
-        ->name('role.index');
-
-    Route::get('/role/create', [AdminRoleController::class, 'roleCreate'])
-        ->name('role.create');
-
-    Route::post('/role/store', [AdminRoleController::class, 'roleStore'])
-        ->name('role.store');
-
-    Route::get('/role/edit/{id}', [AdminRoleController::class, 'roleEdit'])
-        ->name('role.edit');
-
-    Route::post('/role/update/{id}', [AdminRoleController::class, 'roleUpdate'])
-        ->name('role.update');
-
-    Route::delete('/role/delete/{id}', [AdminRoleController::class, 'roleDestroy'])
-        ->name('role.delete');
 });
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/user', [AdminSetupController::class, 'index'])->name('user.index');
+    Route::get('/user/create', [AdminSetupController::class, 'create'])->name('user.create');
+    Route::post('/user/store', [AdminSetupController::class, 'store'])->name('user.store');
+    Route::get('/user/edit/{id}', [AdminSetupController::class, 'edit']) ->name('user.edit');
+    Route::post('/user/update/{id}', [AdminSetupController::class, 'update'])->name('user.update');
+    Route::delete('/user/delete/{id}', [AdminSetupController::class, 'destroy'])->name('user.delete');
+
+});
+
+
+use App\Http\Controllers\Admin\AdminProductController;
+
+// Product CRUD Routes
+
+Route::get('admin/product', [AdminProductController::class, 'index'])
+    ->name('admin.product.index');
+
+Route::get('admin/product/create', [AdminProductController::class, 'create'])
+    ->name('admin.product.create');
+
+Route::post('admin/product/store', [AdminProductController::class, 'store'])
+    ->name('admin.product.store');
+
+Route::get('admin/product/edit/{id}', [AdminProductController::class, 'edit'])
+    ->name('admin.product.edit');
+
+Route::post('admin/product/update/{id}', [AdminProductController::class, 'update'])
+    ->name('admin.product.update');
+
+Route::delete('admin/product/delete/{id}', [AdminProductController::class, 'destroy'])
+    ->name('admin.product.delete');
+
+  

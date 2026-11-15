@@ -15,11 +15,11 @@ class VendorController extends Controller
     {
         return view('vendor.index');
     }
-     public function login()
+    public function login()
     {
         return view('vendor.login.index');
     }
-     public function logout(Request $request): RedirectResponse
+    public function logout(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
 
@@ -29,14 +29,14 @@ class VendorController extends Controller
 
         return redirect()->route('vendor.login');
     }
-     public function profile()
+    public function profile()
     {
         $id = Auth::user()->id;
         $adminData = Auth::user();
         return view('vendor.profile.index', compact('adminData'));
     }
 
-     public function ProfileUpdate(Request $request)
+    public function ProfileUpdate(Request $request)
     {
         $id = Auth::user()->id;
 
@@ -86,7 +86,7 @@ class VendorController extends Controller
 
         return redirect()->route('vendor.profile');
     }
-      public function ChangePassword()
+    public function ChangePassword()
     {
         return view('vendor.profile.change_password');
     }
@@ -110,6 +110,5 @@ class VendorController extends Controller
 
         ]);
         return back()->with("status", " Password Changed Successfully");
-    } 
-
+    }
 }

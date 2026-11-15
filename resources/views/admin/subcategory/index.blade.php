@@ -41,7 +41,7 @@
                                     <th>Category</th>
                                     <th>Name</th>
                                     <th>Slug</th>
-                                    <th>Image</th>
+                                   
                                     <th style="width: 150px;">Action</th>
                                 </tr>
                             </thead>
@@ -61,23 +61,6 @@
                                         <td>{{ $subcategory->name }}</td>
 
                                         <td>{{ $subcategory->slug }}</td>
-
-                                        <td>
-
-                                            @if($subcategory->image)
-
-                                                <img src="{{ asset('storage/' . $subcategory->image) }}"
-                                                    width="70"
-                                                    height="60"
-                                                    style="object-fit: cover;">
-
-                                            @else
-
-                                                No Image
-
-                                            @endif
-
-                                        </td>
 
                                         <td>
 

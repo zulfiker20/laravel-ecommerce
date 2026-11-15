@@ -81,7 +81,7 @@
 <script src="{{ asset('admin/assets/js/index.js') }}"></script>
 <!--app JS-->
 <script src="{{ asset('admin/assets/js/app.js') }}"></script>
-@stack('script')
+@stack('scripts')
 
 </body>
 
