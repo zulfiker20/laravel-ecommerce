@@ -6,9 +6,15 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\Admin\AdminSetupController;
+use App\Http\Controllers\Front\ProductDetailController;
 
+Route::get('/product/details/{slug}', [ProductDetailController::class, 'ProductDetails'])
+    ->name('product.details');
 
-
+    Route::get('/category/{slug}', [ProductDetailController::class, 'CategoryDetails'])
+    ->name('category.details');
+    Route::get('/subcategory/{slug}', [ProductDetailController::class, 'SubcategoryDetails'])
+    ->name('subcategory.details');
 // Admin Group Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -108,10 +114,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('subcategory/delete/{id}', [AdminSubcategory::class, 'destroy'])
         ->name('subcategory.delete');
 
-           Route::get('/subcategory/ajax/{category_id}', [AdminSubcategory::class, 'GetSubCategory']);
-
-       
-
+    Route::get('/subcategory/ajax/{category_id}', [AdminSubcategory::class, 'GetSubCategory']);
 });
 
 
@@ -227,8 +230,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('all/role/edit/{id}', [AdminRoleController::class, 'AllRoleEdit'])->name('all.role.edit');
     Route::post('all/role/update/{id}', [AdminRoleController::class, 'AllRoleUpdate'])->name('all.role.update');
     Route::delete('all/role/delete/{id}', [AdminRoleController::class, 'AllRoleDestroy'])->name('all.role.delete');
-
-
 });
 
 
@@ -236,10 +237,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/user', [AdminSetupController::class, 'index'])->name('user.index');
     Route::get('/user/create', [AdminSetupController::class, 'create'])->name('user.create');
     Route::post('/user/store', [AdminSetupController::class, 'store'])->name('user.store');
-    Route::get('/user/edit/{id}', [AdminSetupController::class, 'edit']) ->name('user.edit');
+    Route::get('/user/edit/{id}', [AdminSetupController::class, 'edit'])->name('user.edit');
     Route::post('/user/update/{id}', [AdminSetupController::class, 'update'])->name('user.update');
     Route::delete('/user/delete/{id}', [AdminSetupController::class, 'destroy'])->name('user.delete');
-
 });
 
 
@@ -264,5 +264,3 @@ Route::post('admin/product/update/{id}', [AdminProductController::class, 'update
 
 Route::delete('admin/product/delete/{id}', [AdminProductController::class, 'destroy'])
     ->name('admin.product.delete');
-
-  
