@@ -257,6 +257,7 @@
     <!-- Template JS -->
     <script src="{{ asset('front/assets/js/main.js?v=5.3') }}"></script>
     <script src="{{ asset('front/assets/js/shop.js?v=5.3') }}"></script>
+    {{-- modal --}}
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -325,32 +326,135 @@
             })
         }
     </script>
-<script>
-    function addToWishList(product_id) {
+    {{-- insert wishlist --}}
+    <script>
+        function addToWishList(product_id) {
 
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            url: "/add-to-wishlist/" + product_id,
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/add-to-wishlist/" + product_id,
 
-          
+                success: function(data) {
 
-            success: function(data) {
+                    if (data.success) {
+                        alert(data.success);
+                    }
 
-                if (data.success) {
-                    alert(data.success);
+                    if (data.error) {
+                        alert(data.error);
+                    }
+
+                },
+
+
+            });
+        }
+    </script>
+    {{-- get wishlist --}}
+    <script type="text/javascript">
+        function wishlist() {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/get-wishlist-product/",
+
+                success: function(result) {
+
+                    var rows = "";
+
+                    $.each(result.wishlist, function(key, value) {
+
+                        rows += `<tr class="pt-30">
+            <td class="image product-thumbnail pt-40">
+                <img src="/${value.product.product_thumbnail}" alt="#" />
+            </td>
+
+            <td class="product-des product-name">
+                <h6>
+                    <a class="product-name mb-10" href="shop-product-right.html">
+                        ${value.product.product_name}
+                    </a>
+                </h6>
+                <div class="product-rate-cover">
+                    <div class="product-rate d-inline-block">
+                        <div class="product-rating" style="width: 90%"></div>
+                    </div>
+                    <span class="font-small ml-5 text-muted">(4.0)</span>
+                </div>
+            </td>
+
+            <td class="price" data-title="Price">
+                ${value.product.discount_price == null
+                    ? `<h3 class="text-brand">$${value.product.selling_price}</h3>`
+                    : `<h3 class="text-brand">$${value.product.discount_price}</h3>`
                 }
+            </td>
 
-                if (data.error) {
-                    alert(data.error);
+            <td class="text-center detail-info" data-title="Stock">
+                ${value.product.product_qty > 0
+                    ? `<span class="stock-status in-stock mb-0">In Stock</span>`
+                    : `<span class="stock-status out-stock mb-0">Stock Out</span>`
                 }
+            </td>
 
-            },
+            <td class="action text-center" data-title="Remove">
+                <a id="${value.id}" onclick="wishlistRemove(this.id)" class="text-body">
+                    <i class="fi-rs-trash"></i>
+                </a>
+            </td>
+        </tr>`;
 
-           
-        });
-    }
-</script>
+                    });
+
+                    $('#wishlistall').html(rows);
+
+                }
+            })
+        }
+        wishlist();
+
+        function wishlistRemove(id) {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/wishlist-remove/" + id,
+
+                success: function(data) {
+                    wishlist();
+                    // Start Message 
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+
+                    // End Message  
+
+
+                }
+            })
+        }
+    </script>
 
 </body>
 

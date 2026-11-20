@@ -20,7 +20,12 @@ Route::get('/subcategory/{slug}', [ProductDetailController::class, 'SubcategoryD
 Route::get('/product/view/modal/{id}', [ProductDetailController::class, 'ProductViewAjax']);
 
 Route::post('/add-to-wishlist/{product_id}', [UserWishlistController::class, 'AddToWishList']);
-Route::get('wishlist/', [UserWishlistController::class, 'WishList'])->name('wishlist');
+Route::get('/wishlist', [UserWishlistController::class, 'WishList'])->name('wishlist');
+
+Route::get('/get-wishlist-product', [UserWishlistController::class, 'GetWishlistProduct']);
+Route::get('/wishlist-remove/{id}' , [UserWishlistController::class, 'WishlistRemove']);
+
+
 // Admin Group Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');

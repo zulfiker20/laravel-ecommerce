@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Wishlist;
+use App\Models\Product;
 use Carbon\Carbon;
 
 class UserWishlistController extends Controller
@@ -47,5 +48,21 @@ class UserWishlistController extends Controller
     {
 
         return view('front.wishlist.index');
-    } // En
+    }
+    public function GetWishlistProduct()
+    {
+
+        $wishlist = Wishlist::with('product')->where('user_id', Auth::id())->latest()->get();
+
+        $wishQty = wishlist::count();
+
+        return response()->json(['wishlist' => $wishlist, 'wishQty' => $wishQty]);
+    } // End Method
+
+    public function WishlistRemove($id)
+    {
+
+        Wishlist::where('user_id', Auth::id())->where('id', $id)->delete();
+        return response()->json(['success' => 'Successfully Product Remove']);
+    } // End Method
 }
