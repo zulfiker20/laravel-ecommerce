@@ -7,14 +7,20 @@ use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\Admin\AdminSetupController;
 use App\Http\Controllers\Front\ProductDetailController;
+use App\Http\Controllers\User\UserWishlistController;
 
 Route::get('/product/details/{slug}', [ProductDetailController::class, 'ProductDetails'])
     ->name('product.details');
 
-    Route::get('/category/{slug}', [ProductDetailController::class, 'CategoryDetails'])
+Route::get('/category/{slug}', [ProductDetailController::class, 'CategoryDetails'])
     ->name('category.details');
-    Route::get('/subcategory/{slug}', [ProductDetailController::class, 'SubcategoryDetails'])
+Route::get('/subcategory/{slug}', [ProductDetailController::class, 'SubcategoryDetails'])
     ->name('subcategory.details');
+
+Route::get('/product/view/modal/{id}', [ProductDetailController::class, 'ProductViewAjax']);
+
+Route::post('/add-to-wishlist/{product_id}', [UserWishlistController::class, 'AddToWishList']);
+Route::get('wishlist/', [UserWishlistController::class, 'WishList'])->name('wishlist');
 // Admin Group Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');

@@ -6,27 +6,28 @@
     <title>Nest - Multipurpose eCommerce HTML Template</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="description" content="" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:title" content="" />
     <meta property="og:type" content="" />
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
-<!-- Favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="{{ asset('front/assets/imgs/theme/favicon.svg') }}" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('front/assets/imgs/theme/favicon.svg') }}" />
 
-<!-- Template CSS -->
-<link rel="stylesheet" href="{{ asset('front/assets/css/plugins/animate.min.css') }}" />
-<link rel="stylesheet" href="{{ asset('front/assets/css/main.css?v=5.3') }}" />
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{{ asset('front/assets/css/plugins/animate.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('front/assets/css/main.css?v=5.3') }}" />
 </head>
 
 <body>
     <!-- Modal -->
- 
+
     <!-- Quick view -->
-   @include('front.layouts.partials.quickview')
+    @include('front.layouts.partials.quickview')
     <!-- Header  -->
-@include('front.layouts.partials.header')
-   <!-- End Header  -->
+    @include('front.layouts.partials.header')
+    <!-- End Header  -->
 
 
 
@@ -57,7 +58,7 @@
                         <ul class="mobile-menu font-heading">
                             <li class="menu-item-has-children">
                                 <a href="index.html">Home</a>
-                                 
+
                             </li>
                             <li class="menu-item-has-children">
                                 <a href="shop-grid-right.html">shop</a>
@@ -94,7 +95,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            
+
                             <li class="menu-item-has-children">
                                 <a href="#">Mega menu</a>
                                 <ul class="dropdown">
@@ -186,10 +187,13 @@
                 </div>
                 <div class="mobile-social-icon mb-50">
                     <h6 class="mb-15">Follow Us</h6>
-                    <a href="#"><img src="assets/imgs/theme/icons/icon-facebook-white.svg" alt="" /></a>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-facebook-white.svg"
+                            alt="" /></a>
                     <a href="#"><img src="assets/imgs/theme/icons/icon-twitter-white.svg" alt="" /></a>
-                    <a href="#"><img src="assets/imgs/theme/icons/icon-instagram-white.svg" alt="" /></a>
-                    <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest-white.svg" alt="" /></a>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-instagram-white.svg"
+                            alt="" /></a>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest-white.svg"
+                            alt="" /></a>
                     <a href="#"><img src="assets/imgs/theme/icons/icon-youtube-white.svg" alt="" /></a>
                 </div>
                 <div class="site-copyright">Copyright 2022 © Nest. All rights reserved. Powered by AliThemes.</div>
@@ -206,7 +210,7 @@
 
 
     <main class="main">
-@yield('content')
+        @yield('content')
     </main>
 
 
@@ -215,8 +219,8 @@
 
 
 
-   <!-- footer -->
-   @include('front.layouts.partials.footer')
+    <!-- footer -->
+    @include('front.layouts.partials.footer')
     <!-- Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
@@ -227,32 +231,126 @@
             </div>
         </div>
     </div>
-<!-- Vendor JS -->
-<script src="{{ asset('front/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
-<script src="{{ asset('front/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('front/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
-<script src="{{ asset('front/assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
+    <!-- Vendor JS -->
+    <script src="{{ asset('front/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
 
-<!-- Plugins JS -->
-<script src="{{ asset('front/assets/js/plugins/slick.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/jquery.syotimer.min.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/waypoints.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/wow.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/perfect-scrollbar.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/magnific-popup.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/select2.min.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/counterup.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/jquery.countdown.min.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/images-loaded.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/isotope.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/scrollup.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/jquery.vticker-min.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/jquery.theia.sticky.js') }}"></script>
-<script src="{{ asset('front/assets/js/plugins/jquery.elevatezoom.js') }}"></script>
+    <!-- Plugins JS -->
+    <script src="{{ asset('front/assets/js/plugins/slick.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/jquery.syotimer.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/waypoints.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/wow.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/magnific-popup.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/select2.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/counterup.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/images-loaded.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/isotope.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/scrollup.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/jquery.vticker-min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/jquery.theia.sticky.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins/jquery.elevatezoom.js') }}"></script>
 
-<!-- Template JS -->
-<script src="{{ asset('front/assets/js/main.js?v=5.3') }}"></script>
-<script src="{{ asset('front/assets/js/shop.js?v=5.3') }}"></script>
+    <!-- Template JS -->
+    <script src="{{ asset('front/assets/js/main.js?v=5.3') }}"></script>
+    <script src="{{ asset('front/assets/js/shop.js?v=5.3') }}"></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function productView(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/product/view/modal/' + id,
+                dataType: 'json',
+                success: function(data) {
+                    $('#pname').text(data.product.product_name);
+                    $('#pprice').text(data.product.selling_price);
+                    $('#pcode').text(data.product.product_code);
+                    $('#pcategory').text(data.product.category.name);
+                    $('#pbrand').text(data.product.brand.name);
+                    $('#pimage').attr('src', '/' + data.product.product_thambnail);
+                    if (data.product.discount_price == null) {
+                        $('#pprice').text('');
+                        $('#oldprice').text('');
+                        $('#pprice').text(data.product.selling_price);
+
+                    } else {
+                        $('#pprice').text(data.product.discount_price);
+                        $('#oldprice').text(data.product.selling_price);
+                    } // end else
+
+                    if (data.product.product_qty > 0) {
+                        $('#aviable').text('');
+                        $('#stockout').text('');
+                        $('#aviable').text('aviable');
+
+                    } else {
+                        $('#aviable').text('');
+                        $('#stockout').text('');
+                        $('#stockout').text('stockout');
+                    }
+                    ///End Start Stock Option
+
+                    ///Size 
+
+                    $('select[name="size"]').empty();
+                    $.each(data.size, function(key, value) {
+                        $('select[name="size"]').append('<option value="' + value + ' ">' + value +
+                            '  </option')
+                        if (data.size == "") {
+                            $('#sizeArea').hide();
+                        } else {
+                            $('#sizeArea').show();
+                        }
+                    }) // end size
+
+                    $('select[name="color"]').empty();
+                    $.each(data.color, function(key, value) {
+                        $('select[name="color"]').append('<option value="' + value + ' ">' + value +
+                            '  </option')
+                        if (data.color == "") {
+                            $('#colorArea').hide();
+                        } else {
+                            $('#colorArea').show();
+                        }
+                    }) // end size
+                }
+            })
+        }
+    </script>
+<script>
+    function addToWishList(product_id) {
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/add-to-wishlist/" + product_id,
+
+          
+
+            success: function(data) {
+
+                if (data.success) {
+                    alert(data.success);
+                }
+
+                if (data.error) {
+                    alert(data.error);
+                }
+
+            },
+
+           
+        });
+    }
+</script>
 
 </body>
 
