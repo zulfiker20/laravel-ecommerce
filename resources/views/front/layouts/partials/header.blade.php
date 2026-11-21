@@ -113,6 +113,14 @@
                                    </a>
                                    <a href="{{ route('wishlist') }}"><span class="lable">Wishlist</span></a>
                                </div>
+                                <div class="header-action-icon-2">
+                                   <a>
+                                       <img class="svgInject" alt="Nest"
+                                           src="assets/imgs/theme/icons/icon-heart.svg" />
+                                       <span class="pro-count blue">6</span>
+                                   </a>
+                                   <a href="{{ route('compare') }}"><span class="lable">Compare</span></a>
+                               </div>
                                <div class="header-action-icon-2">
                                    <a class="mini-cart-icon" href="shop-cart.html">
                                        <img alt="Nest" src="assets/imgs/theme/icons/icon-cart.svg" />

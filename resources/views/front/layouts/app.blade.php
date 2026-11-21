@@ -455,6 +455,31 @@
             })
         }
     </script>
+    {{-- insert compare --}}
+    <script>
+        function addToCompare(product_id) {
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/add-to-compare/" + product_id,
+
+                success: function(data) {
+                   
+                    if (data.success) {
+                        alert(data.success);
+                    }
+
+                    if (data.error) {
+                        alert(data.error);
+                    }
+
+                },
+
+
+            });
+        }
+    </script>
 
 </body>
 

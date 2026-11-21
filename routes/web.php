@@ -8,6 +8,7 @@ use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\Admin\AdminSetupController;
 use App\Http\Controllers\Front\ProductDetailController;
 use App\Http\Controllers\User\UserWishlistController;
+use App\Http\Controllers\User\UserCompareController;
 
 Route::get('/product/details/{slug}', [ProductDetailController::class, 'ProductDetails'])
     ->name('product.details');
@@ -24,6 +25,9 @@ Route::get('/wishlist', [UserWishlistController::class, 'WishList'])->name('wish
 
 Route::get('/get-wishlist-product', [UserWishlistController::class, 'GetWishlistProduct']);
 Route::get('/wishlist-remove/{id}' , [UserWishlistController::class, 'WishlistRemove']);
+
+Route::post('/add-to-compare/{product_id}', [UserCompareController::class, 'AddToCompareList']);
+Route::get('/compare', [UserCompareController::class, 'compare'])->name('compare');
 
 
 // Admin Group Routes
