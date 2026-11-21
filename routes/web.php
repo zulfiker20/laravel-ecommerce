@@ -15,6 +15,7 @@ Route::get('/product/details/{slug}', [ProductDetailController::class, 'ProductD
 
 Route::get('/category/{slug}', [ProductDetailController::class, 'CategoryDetails'])
     ->name('category.details');
+
 Route::get('/subcategory/{slug}', [ProductDetailController::class, 'SubcategoryDetails'])
     ->name('subcategory.details');
 
@@ -28,7 +29,8 @@ Route::get('/wishlist-remove/{id}' , [UserWishlistController::class, 'WishlistRe
 
 Route::post('/add-to-compare/{product_id}', [UserCompareController::class, 'AddToCompareList']);
 Route::get('/compare', [UserCompareController::class, 'compare'])->name('compare');
-
+Route::get('/get-compare-product', [UserCompareController::class, 'GetComparelistProduct']);
+Route::get('/compare-remove/{id}' , [UserCompareController::class, 'comparelistRemove']);
 
 // Admin Group Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {

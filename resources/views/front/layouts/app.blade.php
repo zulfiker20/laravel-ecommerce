@@ -465,7 +465,7 @@
                 url: "/add-to-compare/" + product_id,
 
                 success: function(data) {
-                   
+
                     if (data.success) {
                         alert(data.success);
                     }
@@ -478,6 +478,203 @@
 
 
             });
+        }
+    </script>
+    {{-- get compare --}}
+    <script type="text/javascript">
+        function compare() {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/get-compare-product/",
+
+
+                success: function(result) {
+
+                    var rows = "";
+
+                    rows += `
+        <tr class="pr_image">
+            <td class="text-muted font-sm fw-600 font-heading mw-200">
+                Preview
+            </td>
+    `;
+
+                    $.each(result.comparehlist, function(key, value) {
+
+                        rows += `
+            <td class="row_img">
+                <img src="/${value.product.product_thumbnail}"
+                    alt="compare-img"
+                    width="120">
+            </td>
+        `;
+
+                    });
+
+                    rows += `</tr>`;
+                    // Product Name
+                    rows += `
+        <tr class="pr_title">
+            <td class="text-muted font-sm fw-600 font-heading">
+                Name
+            </td>
+    `;
+
+                    $.each(result.comparehlist, function(key, value) {
+
+                        rows += `
+            <td class="product_name">
+                <h6>
+                    <a href="/product/details/${value.product.id}"
+                       class="text-heading">
+                        ${value.product.product_name}
+                    </a>
+                </h6>
+            </td>
+        `;
+
+                    });
+
+                    rows += `</tr>`;
+                    // Product Price
+                    rows += `
+    <tr class="pr_price">
+        <td class="text-muted font-sm fw-600 font-heading">
+            Price
+        </td>
+`;
+
+                    $.each(result.comparehlist, function(key, value) {
+
+                        rows += `
+        <td class="product_price">
+            <h4 class="price text-brand">
+                ${value.product.discount_price == null
+                        ? `<h4 class="price text-brand">$${value.product.selling_price}</h4>`
+                        :`<h4 class="price text-brand">$${value.product.discount_price}</h4>`
+
+                        } 
+            </h4>
+        </td>
+    `;
+
+                    });
+
+                    rows += `</tr>`;
+                    // Product Description
+                    rows += `
+    <tr class="description">
+        <td class="text-muted font-sm fw-600 font-heading">
+            Description
+        </td>
+`;
+
+                    $.each(result.comparehlist, function(key, value) {
+
+                        rows += `
+        <td class="row_text font-xs">
+            <p class="font-sm text-muted">
+                ${value.product.short_descp ?? ''}
+            </p>
+        </td>
+    `;
+
+                    });
+
+                    rows += `</tr>`;
+                    // Product Stock Status
+                    rows += `
+    <tr class="pr_stock">
+        <td class="text-muted font-sm fw-600 font-heading">
+            Stock status
+        </td>
+`;
+
+                    $.each(result.comparehlist, function(key, value) {
+
+                        rows += `
+        <td class="row_stock">
+            ${
+                value.product.product_qty > 0
+                ? '<span class="stock-status in-stock mb-0">In Stock</span>'
+                : '<span class="stock-status out-stock mb-0">Out of stock</span>'
+            }
+        </td>
+    `;
+
+                    });
+
+                    rows += `</tr>`;
+                    // Product Remove Row
+                    rows += `
+    <tr class="pr_remove text-muted">
+        <td class="text-muted font-md fw-600"></td>
+`;
+
+                    $.each(result.comparehlist, function(key, value) {
+
+                        rows += `
+        <td class="row_remove">
+            <a id="${value.id}" onclick="comparelistRemove(this.id)"
+               class="text-muted">
+
+                <i class="fi-rs-trash mr-5"></i>
+                <span>Remove</span>
+
+            </a>
+        </td>
+    `;
+
+                    });
+
+                    rows += `</tr>`;
+
+                    $('#compare').html(rows);
+
+                }
+            })
+        }
+        compare();
+         function comparelistRemove(id) {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/compare-remove/" + id,
+
+                success: function(data) {
+                    compare();
+                    // Start Message 
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+
+                    // End Message  
+
+
+                }
+            })
         }
     </script>
 
