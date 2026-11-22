@@ -32,16 +32,16 @@
             <ul>
                 <li> <a href="{{ route('admin.category.index') }}"><i class="bx bx-right-arrow-alt"></i>Category</a>
                 </li>
-              
-                    <li> <a href="{{ route('admin.subcategory.index') }}"><i
-                                class="bx bx-right-arrow-alt"></i>Subcategory</a>
-                    </li>
-            
-               
-                    <li>
-                        <a href="{{ route('admin.brand.index') }}"><i class="bx bx-right-arrow-alt"></i>Brand</a>
-                    </li>
-          
+
+                <li> <a href="{{ route('admin.subcategory.index') }}"><i
+                            class="bx bx-right-arrow-alt"></i>Subcategory</a>
+                </li>
+
+
+                <li>
+                    <a href="{{ route('admin.brand.index') }}"><i class="bx bx-right-arrow-alt"></i>Brand</a>
+                </li>
+
         </li>
         <li> <a href="{{ route('admin.banner.index') }}"><i class="bx bx-right-arrow-alt"></i>Banner</a>
         </li>
@@ -94,7 +94,7 @@
             </li>
         </ul>
     </li>
-     <li>
+    <li>
         <a href="javascript:;" class="has-arrow">
             <div class="parent-icon"><i class="bx bx-category"></i>
             </div>
@@ -103,9 +103,22 @@
         <ul>
             <li> <a href="{{ route('admin.division.index') }}"><i class="bx bx-right-arrow-alt"></i>Divisions</a>
             </li>
-             <li> <a href="{{ route('admin.district.index') }}"><i class="bx bx-right-arrow-alt"></i>Districts</a>
+            <li> <a href="{{ route('admin.district.index') }}"><i class="bx bx-right-arrow-alt"></i>Districts</a>
             </li>
-             <li> <a href="{{ route('admin.state.index') }}"><i class="bx bx-right-arrow-alt"></i>States</a>
+            <li> <a href="{{ route('admin.state.index') }}"><i class="bx bx-right-arrow-alt"></i>States</a>
+            </li>
+        </ul>
+    </li>
+     <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class="bx bx-category"></i>
+            </div>
+            <div class="menu-title">Blog Area</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('admin.blog_category.index') }}"><i class="bx bx-right-arrow-alt"></i>Categories</a>
+            </li>
+            <li> <a href="{{ route('admin.blog_post.index') }}"><i class="bx bx-right-arrow-alt"></i>Posts</a>
             </li>
         </ul>
     </li>

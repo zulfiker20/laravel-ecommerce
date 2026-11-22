@@ -25,12 +25,12 @@ Route::post('/add-to-wishlist/{product_id}', [UserWishlistController::class, 'Ad
 Route::get('/wishlist', [UserWishlistController::class, 'WishList'])->name('wishlist');
 
 Route::get('/get-wishlist-product', [UserWishlistController::class, 'GetWishlistProduct']);
-Route::get('/wishlist-remove/{id}' , [UserWishlistController::class, 'WishlistRemove']);
+Route::get('/wishlist-remove/{id}', [UserWishlistController::class, 'WishlistRemove']);
 
 Route::post('/add-to-compare/{product_id}', [UserCompareController::class, 'AddToCompareList']);
 Route::get('/compare', [UserCompareController::class, 'compare'])->name('compare');
 Route::get('/get-compare-product', [UserCompareController::class, 'GetComparelistProduct']);
-Route::get('/compare-remove/{id}' , [UserCompareController::class, 'comparelistRemove']);
+Route::get('/compare-remove/{id}', [UserCompareController::class, 'comparelistRemove']);
 
 // Admin Group Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -284,7 +284,7 @@ Route::delete('admin/product/delete/{id}', [AdminProductController::class, 'dest
 
 
 
-    use App\Http\Controllers\Admin\AdminDivisionController;
+use App\Http\Controllers\Admin\AdminDivisionController;
 
 Route::get('/division', [AdminDivisionController::class, 'index'])
     ->name('admin.division.index');
@@ -305,8 +305,8 @@ Route::delete('/division/delete/{id}', [AdminDivisionController::class, 'destroy
     ->name('admin.division.delete');
 
 
-    use App\Http\Controllers\Admin\AdminDistrictController;
-    // District CRUD
+use App\Http\Controllers\Admin\AdminDistrictController;
+// District CRUD
 Route::get('/district', [AdminDistrictController::class, 'index'])
     ->name('admin.district.index');
 
@@ -326,7 +326,7 @@ Route::delete('/district/delete/{id}', [AdminDistrictController::class, 'destroy
     ->name('admin.district.delete');
 
 
-    
+
 use App\Http\Controllers\Admin\AdminStateController;
 
 Route::get('/state', [AdminStateController::class, 'index'])
@@ -346,3 +346,53 @@ Route::post('/state/update/{id}', [AdminStateController::class, 'update'])
 
 Route::delete('/state/delete/{id}', [AdminStateController::class, 'destroy'])
     ->name('admin.state.delete');
+
+
+use App\Http\Controllers\Admin\AdminBlogCategoryController;
+// Blog Category CRUD
+Route::get('/blog-categories', [AdminBlogCategoryController::class, 'index'])
+    ->name('admin.blog_category.index');
+
+Route::get('/blog-categories/create', [AdminBlogCategoryController::class, 'create'])
+    ->name('admin.blog_category.create');
+
+Route::post('/blog-categories/store', [AdminBlogCategoryController::class, 'store'])
+    ->name('admin.blog_category.store');
+
+Route::get('/blog-categories/edit/{id}', [AdminBlogCategoryController::class, 'edit'])
+    ->name('admin.blog_category.edit');
+
+Route::post('/blog-categories/update/{id}', [AdminBlogCategoryController::class, 'update'])
+    ->name('admin.blog_category.update');
+
+Route::delete('/blog-categories/delete/{id}', [AdminBlogCategoryController::class, 'destroy'])
+    ->name('admin.blog_category.delete');
+
+
+
+use App\Http\Controllers\Admin\AdminBlogPostController;
+
+Route::get('/blog-post', [AdminBlogPostController::class, 'index'])
+    ->name('admin.blog_post.index');
+
+Route::get('/blog-post/create', [AdminBlogPostController::class, 'create'])
+    ->name('admin.blog_post.create');
+
+Route::post('/blog-post/store', [AdminBlogPostController::class, 'store'])
+    ->name('admin.blog_post.store');
+
+Route::get('/blog-post/edit/{id}', [AdminBlogPostController::class, 'edit'])
+    ->name('admin.blog_post.edit');
+
+Route::post('/blog-post/update/{id}', [AdminBlogPostController::class, 'update'])
+    ->name('admin.blog_post.update');
+
+Route::delete('/blog-post/delete/{id}', [AdminBlogPostController::class, 'destroy'])
+    ->name('admin.blog_post.delete');
+
+
+use App\Http\Controllers\Front\HomeBlogController;
+
+Route::get('/blog', [HomeBlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [HomeBlogController::class, 'details'])->name('blog.details');
+Route::get('/blog/category/{slug}', [HomeBlogController::class, 'category'])->name('blog.category');

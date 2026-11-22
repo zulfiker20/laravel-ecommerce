@@ -333,7 +333,7 @@
                                    @endforeach
 
                                    <li>
-                                       <a href="page-contact.html">Contact</a>
+                                       <a href="{{route('blog.index')}}">Blog</a>
                                    </li>
                                </ul>
                            </nav>
