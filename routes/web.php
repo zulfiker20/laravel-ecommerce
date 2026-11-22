@@ -281,3 +281,68 @@ Route::post('admin/product/update/{id}', [AdminProductController::class, 'update
 
 Route::delete('admin/product/delete/{id}', [AdminProductController::class, 'destroy'])
     ->name('admin.product.delete');
+
+
+
+    use App\Http\Controllers\Admin\AdminDivisionController;
+
+Route::get('/division', [AdminDivisionController::class, 'index'])
+    ->name('admin.division.index');
+
+Route::get('/division/create', [AdminDivisionController::class, 'create'])
+    ->name('admin.division.create');
+
+Route::post('/division/store', [AdminDivisionController::class, 'store'])
+    ->name('admin.division.store');
+
+Route::get('/division/edit/{id}', [AdminDivisionController::class, 'edit'])
+    ->name('admin.division.edit');
+
+Route::post('/division/update/{id}', [AdminDivisionController::class, 'update'])
+    ->name('admin.division.update');
+
+Route::delete('/division/delete/{id}', [AdminDivisionController::class, 'destroy'])
+    ->name('admin.division.delete');
+
+
+    use App\Http\Controllers\Admin\AdminDistrictController;
+    // District CRUD
+Route::get('/district', [AdminDistrictController::class, 'index'])
+    ->name('admin.district.index');
+
+Route::get('/district/create', [AdminDistrictController::class, 'create'])
+    ->name('admin.district.create');
+
+Route::post('/district/store', [AdminDistrictController::class, 'store'])
+    ->name('admin.district.store');
+
+Route::get('/district/edit/{id}', [AdminDistrictController::class, 'edit'])
+    ->name('admin.district.edit');
+
+Route::post('/district/update/{id}', [AdminDistrictController::class, 'update'])
+    ->name('admin.district.update');
+
+Route::delete('/district/delete/{id}', [AdminDistrictController::class, 'destroy'])
+    ->name('admin.district.delete');
+
+
+    
+use App\Http\Controllers\Admin\AdminStateController;
+
+Route::get('/state', [AdminStateController::class, 'index'])
+    ->name('admin.state.index');
+
+Route::get('/state/create', [AdminStateController::class, 'create'])
+    ->name('admin.state.create');
+
+Route::post('/state/store', [AdminStateController::class, 'store'])
+    ->name('admin.state.store');
+
+Route::get('/state/edit/{id}', [AdminStateController::class, 'edit'])
+    ->name('admin.state.edit');
+
+Route::post('/state/update/{id}', [AdminStateController::class, 'update'])
+    ->name('admin.state.update');
+
+Route::delete('/state/delete/{id}', [AdminStateController::class, 'destroy'])
+    ->name('admin.state.delete');

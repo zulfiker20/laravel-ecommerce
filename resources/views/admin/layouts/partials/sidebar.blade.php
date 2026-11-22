@@ -94,6 +94,21 @@
             </li>
         </ul>
     </li>
+     <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class="bx bx-category"></i>
+            </div>
+            <div class="menu-title">Shipping Area</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('admin.division.index') }}"><i class="bx bx-right-arrow-alt"></i>Divisions</a>
+            </li>
+             <li> <a href="{{ route('admin.district.index') }}"><i class="bx bx-right-arrow-alt"></i>Districts</a>
+            </li>
+             <li> <a href="{{ route('admin.state.index') }}"><i class="bx bx-right-arrow-alt"></i>States</a>
+            </li>
+        </ul>
+    </li>
     </ul>
     <!--end navigation-->
 </div>
