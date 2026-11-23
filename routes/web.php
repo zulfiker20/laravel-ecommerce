@@ -396,3 +396,7 @@ use App\Http\Controllers\Front\HomeBlogController;
 Route::get('/blog', [HomeBlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [HomeBlogController::class, 'details'])->name('blog.details');
 Route::get('/blog/category/{slug}', [HomeBlogController::class, 'category'])->name('blog.category');
+
+
+use App\Http\Controllers\Front\FrontReviewController;
+Route::post('/reviews/store/{product}', [FrontReviewController::class, 'store'])->name('reviews.store');

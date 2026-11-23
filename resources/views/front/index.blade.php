@@ -1,4 +1,5 @@
        @extends('front.layouts.app')
+       @section('title', 'Home | Nest')
        @section('content')
            <section class="home-slider position-relative mb-30">
                <div class="container">

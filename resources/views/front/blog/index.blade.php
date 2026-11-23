@@ -1,4 +1,5 @@
        @extends('front.layouts.app')
+         @section('title', 'Blog | Nest')
        @section('content')
            <div class="page-header mt-30 mb-75">
                <div class="container">

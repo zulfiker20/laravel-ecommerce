@@ -1,4 +1,5 @@
        @extends('front.layouts.app')
+       @section('title', 'Home | Nest')
        @section('content')
            <div class="page-header breadcrumb-wrap">
                <div class="container">
