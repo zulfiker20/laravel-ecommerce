@@ -109,7 +109,7 @@
             </li>
         </ul>
     </li>
-     <li>
+    <li>
         <a href="javascript:;" class="has-arrow">
             <div class="parent-icon"><i class="bx bx-category"></i>
             </div>
@@ -119,6 +119,19 @@
             <li> <a href="{{ route('admin.blog_category.index') }}"><i class="bx bx-right-arrow-alt"></i>Categories</a>
             </li>
             <li> <a href="{{ route('admin.blog_post.index') }}"><i class="bx bx-right-arrow-alt"></i>Posts</a>
+            </li>
+        </ul>
+    </li>
+     <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class="bx bx-category"></i>
+            </div>
+            <div class="menu-title">Review Manage</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('admin.reviews.index') }}"><i class="bx bx-right-arrow-alt"></i>Pending Review</a>
+            </li>
+            <li> <a href="{{ route('review.publish') }}"><i class="bx bx-right-arrow-alt"></i>Publish Review</a>
             </li>
         </ul>
     </li>

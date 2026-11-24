@@ -399,4 +399,13 @@ Route::get('/blog/category/{slug}', [HomeBlogController::class, 'category'])->na
 
 
 use App\Http\Controllers\Front\FrontReviewController;
+
 Route::post('/reviews/store/{product}', [FrontReviewController::class, 'store'])->name('reviews.store');
+
+
+use App\Http\Controllers\Admin\AdminReviewController;
+
+Route::get('/reviews/index', [AdminReviewController::class, 'index'])->name('admin.reviews.index');
+Route::get('/review/approve/{id}', [AdminReviewController::class, 'ReviewApprove'])->name('review.approve');
+Route::get('/review/publish', [AdminReviewController::class, 'PublishReview'])->name('review.publish');
+Route::delete('/reviews/delete/{id}', [AdminReviewController::class, 'destroy'])->name('admin.reviews.destroy');

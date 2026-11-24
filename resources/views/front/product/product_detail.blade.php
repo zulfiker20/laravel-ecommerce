@@ -42,11 +42,33 @@
                                 @endif
                                 <h2 class="title-detail">{{ $product->product_name }}</h2>
                                 <div class="product-detail-rating">
+                                    @php
+
+                                        $reviewcount = App\Models\Review::where('product_id', $product->id)
+                                            ->where('status', 1)
+                                            ->latest()
+                                            ->get();
+
+                                        $avarage = App\Models\Review::where('product_id', $product->id)
+                                            ->where('status', 1)
+                                            ->avg('rating');
+                                    @endphp
                                     <div class="product-rate-cover text-end">
                                         <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
+                                            @if ($avarage == 0)
+                                            @elseif($avarage == 1 || $avarage < 2)
+                                                <div class="product-rating" style="width: 20%"></div>
+                                            @elseif($avarage == 2 || $avarage < 3)
+                                                <div class="product-rating" style="width: 40%"></div>
+                                            @elseif($avarage == 3 || $avarage < 4)
+                                                <div class="product-rating" style="width: 60%"></div>
+                                            @elseif($avarage == 4 || $avarage < 5)
+                                                <div class="product-rating" style="width: 80%"></div>
+                                            @elseif($avarage == 5 || $avarage < 5)
+                                                <div class="product-rating" style="width: 100%"></div>
+                                            @endif
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> (32 reviews)</span>
+                                        <span class="font-small ml-5 text-muted"> ({{ count($reviewcount) }} reviews)</span>
                                     </div>
                                 </div>
                                 @php
@@ -127,7 +149,8 @@
                                         </li>
                                     </ul>
                                     <ul class="float-start">
-                                        <li class="mb-5">Product Code: <a href="#">{{ $product->product_code }}</a>
+                                        <li class="mb-5">Product Code: <a
+                                                href="#">{{ $product->product_code }}</a>
                                         </li>
 
                                         <li class="mb-5">Tags: <a href="#" rel="tag">
@@ -158,8 +181,7 @@
                                         href="#Vendor-info">Vendor</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews
-                                        (3)</a>
+                                    <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews ({{ count($reviewcount) }})</a>
                                 </li>
                             </ul>
                             <div class="tab-content shop_info_tab entry-main-content">
@@ -367,54 +389,52 @@
                                                             ->get();
                                                     @endphp
                                                     @foreach ($reviews as $item)
-                                                        
-                                                            @if ($item->status == 0)
-                                                            @else
-                                                                <div
-                                                                    class="single-comment justify-content-between d-flex mb-30">
-                                                                    <div class="user justify-content-between d-flex">
-                                                                        <div class="thumb text-center">
-                                                                            <img src="{{ !empty($item->user->photo) ? url('upload/user_images/' . $item->user->photo) : url('upload/no_image.jpg') }}"
-                                                                                alt="" />
-                                                                            <a href="#"
-                                                                                class="font-heading text-brand">{{ $item->user->name }}</a>
-                                                                        </div>
-                                                                        <div class="desc">
-                                                                            <div
-                                                                                class="d-flex justify-content-between mb-10">
-                                                                                <div class="d-flex align-items-center">
-                                                                                    <span class="font-xs text-muted">
-                                                                                        {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
-                                                                                    </span>
-                                                                                </div>
-                                                                                <div class="product-rate d-inline-block">
-
-                                                                                    @if ($item->rating == null)
-                                                                                    @elseif($item->rating == 1)
-                                                                                        <div class="product-rating"
-                                                                                            style="width: 20%"></div>
-                                                                                    @elseif($item->rating == 2)
-                                                                                        <div class="product-rating"
-                                                                                            style="width: 40%"></div>
-                                                                                    @elseif($item->rating == 3)
-                                                                                        <div class="product-rating"
-                                                                                            style="width: 60%"></div>
-                                                                                    @elseif($item->rating == 4)
-                                                                                        <div class="product-rating"
-                                                                                            style="width: 80%"></div>
-                                                                                    @elseif($item->rating == 5)
-                                                                                        <div class="product-rating"
-                                                                                            style="width: 100%"></div>
-                                                                                    @endif
-                                                                                </div>
+                                                        @if ($item->status == 0)
+                                                        @else
+                                                            <div
+                                                                class="single-comment justify-content-between d-flex mb-30">
+                                                                <div class="user justify-content-between d-flex">
+                                                                    <div class="thumb text-center">
+                                                                        <img src="{{ !empty($item->user->photo) ? url('upload/user_images/' . $item->user->photo) : url('upload/no_image.jpg') }}"
+                                                                            alt="" />
+                                                                        <a href="#"
+                                                                            class="font-heading text-brand">{{ $item->user->name }}</a>
+                                                                    </div>
+                                                                    <div class="desc">
+                                                                        <div class="d-flex justify-content-between mb-10">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <span class="font-xs text-muted">
+                                                                                    {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
+                                                                                </span>
                                                                             </div>
-                                                                            <p class="mb-10">{{ $item->comment }} <a
-                                                                                    href="#"
-                                                                                    class="reply">Reply</a></p>
+                                                                            <div class="product-rate d-inline-block">
+
+                                                                                @if ($item->rating == null)
+                                                                                @elseif($item->rating == 1)
+                                                                                    <div class="product-rating"
+                                                                                        style="width: 20%"></div>
+                                                                                @elseif($item->rating == 2)
+                                                                                    <div class="product-rating"
+                                                                                        style="width: 40%"></div>
+                                                                                @elseif($item->rating == 3)
+                                                                                    <div class="product-rating"
+                                                                                        style="width: 60%"></div>
+                                                                                @elseif($item->rating == 4)
+                                                                                    <div class="product-rating"
+                                                                                        style="width: 80%"></div>
+                                                                                @elseif($item->rating == 5)
+                                                                                    <div class="product-rating"
+                                                                                        style="width: 100%"></div>
+                                                                                @endif
+                                                                            </div>
                                                                         </div>
+                                                                        <p class="mb-10">{{ $item->comment }} <a
+                                                                                href="#" class="reply">Reply</a>
+                                                                        </p>
                                                                     </div>
                                                                 </div>
-                                                            @endif
+                                                            </div>
+                                                        @endif
                                                     @endforeach
 
                                                 </div>
