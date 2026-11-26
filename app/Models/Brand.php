@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
      protected $guarded = [];
-     public function brand()
+    public function products()
     {
-        return $this->belongsTo(Brand::class, 'brand_id', 'id');
+        return $this->hasMany(Product::class, 'brand_id', 'id');
     }
 }

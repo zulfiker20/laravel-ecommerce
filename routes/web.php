@@ -409,3 +409,8 @@ Route::get('/reviews/index', [AdminReviewController::class, 'index'])->name('adm
 Route::get('/review/approve/{id}', [AdminReviewController::class, 'ReviewApprove'])->name('review.approve');
 Route::get('/review/publish', [AdminReviewController::class, 'PublishReview'])->name('review.publish');
 Route::delete('/reviews/delete/{id}', [AdminReviewController::class, 'destroy'])->name('admin.reviews.destroy');
+
+
+use App\Http\Controllers\Front\FrontShopController;
+Route::get('/shop', [FrontShopController::class, 'index'])->name('shop.index');
+Route::post('/shop/filter', [FrontShopController::class, 'filter'])->name('shop.filter');

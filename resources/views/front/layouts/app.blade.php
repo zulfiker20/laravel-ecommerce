@@ -636,7 +636,8 @@
             })
         }
         compare();
-         function comparelistRemove(id) {
+
+        function comparelistRemove(id) {
             $.ajax({
                 type: "GET",
                 dataType: 'json',
