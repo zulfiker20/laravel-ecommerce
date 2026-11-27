@@ -414,3 +414,8 @@ Route::delete('/reviews/delete/{id}', [AdminReviewController::class, 'destroy'])
 use App\Http\Controllers\Front\FrontShopController;
 Route::get('/shop', [FrontShopController::class, 'index'])->name('shop.index');
 Route::post('/shop/filter', [FrontShopController::class, 'filter'])->name('shop.filter');
+
+use App\Http\Controllers\Front\FrontCartController;
+Route::post('/cart/data/store/{id}', [FrontCartController::class, 'AddToCart']);
+Route::get('/product/mini/cart', [FrontCartController::class, 'AddMiniCart']);
+Route::get('/minicart/product/remove/{rowId}', [FrontCartController::class, 'RemoveMiniCart']);

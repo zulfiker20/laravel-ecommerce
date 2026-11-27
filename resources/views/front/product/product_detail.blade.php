@@ -79,15 +79,15 @@
                                 <div class="clearfix product-price-cover">
                                     <div class="product-price primary-color float-left">
                                         @if ($product->discount_price == null)
-                                            <span class="current-price text-brand">${{ $product->selling_price }}</span>
-                                        @else
-                                            <span>
-                                                <span class="save-price font-md color3 ml-15">{{ round($discount) }}%
-                                                    Off</span>
-                                                <span class="old-price font-md ml-15">${{ $product->discount_price }}</span>
-                                            </span>
-                                        @endif
-
+                                                       <div class="product-price">
+                                                           <span>${{ $product->selling_price }}</span>
+                                                       </div>
+                                                   @else
+                                                       <div class="product-price">
+                                                           <span>${{ $product->discount_price }}</span>
+                                                           <span class="old-price">${{ $product->selling_price }}</span>
+                                                       </div>
+                                                   @endif
                                     </div>
                                 </div>
                                 <div class="short-desc mb-30">
